@@ -1,13 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import "./Navbar.scss"
-
 const Navbar = () => {
   return (
     <div>
-      <span className="logo">Redux Store</span>
-      <div>
+      <div id="kopa">
+        <span className="logo">Redux Store</span>
+
         <Link className="navLink" to="/">
           Home
         </Link>
