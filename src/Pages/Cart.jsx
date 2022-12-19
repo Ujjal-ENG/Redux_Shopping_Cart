@@ -19,7 +19,7 @@ const Cart = () => {
         {cartItems.map((item) => {
           return (
             <>
-              <div className="cartCard" key={item.id}>
+              <div key={item.id} className="cartCard">
                 <img src={item.image} alt={item.title} />
                 <h4>{item.title}</h4>
                 <h5>${item.price}</h5>
@@ -27,7 +27,6 @@ const Cart = () => {
                   Remove Items
                 </button>
               </div>
-              
             </>
           );
         })}
