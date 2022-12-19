@@ -9,3 +9,45 @@ a {
   text-decoration: none;
   color: orangered;
 }
+
+.productsWrapper {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+.card {
+
+  margin: 20px;
+  align-items: center;
+}
+
+.card img {
+  width: 600px;
+  height: 400px;
+  border: 10px;
+}
+
+h4,
+h5 {
+  text-align: center;
+  width: 40%;
+  margin-left: 24%;
+}
+.btn {
+  text-align: center;
+  padding: 10px 20px;
+  margin-bottom: 50px;
+  margin-left: 25%;
+  border: none;
+  background-color: rgb(199, 253, 91);
+  font-weight: bolder;
+  font-size: 30px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn:active {
+  background-color: white;
+  border: 3px solid thistle;
+}
