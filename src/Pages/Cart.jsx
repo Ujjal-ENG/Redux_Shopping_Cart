@@ -4,7 +4,6 @@ import { useDispatch } from "react-redux";
 import { remove } from "../store/cartSlice";
 
 const Cart = () => {
-  
   const cartItems = useSelector((state) => state.cart);
 
   const dispatch = useDispatch();
@@ -17,16 +16,21 @@ const Cart = () => {
     <div>
       <h3>Cart</h3>
       <div className="cartWrapper">
-        {cartItems.map((item) => (
-          <div className="cartCard" key={item.id}>
-            <img src={item.image} alt={item.title} />
-            <h4>{item.title}</h4>
-            <h5>${item.price}</h5>
-            <button className="btn" onClick={() => handleRemove(item.id)}>
-              Remove Items
-            </button>
-          </div>
-        ))}
+        {cartItems.map((item) => {
+          return (
+            <>
+              <div className="cartCard" key={item.id}>
+                <img src={item.image} alt={item.title} />
+                <h4>{item.title}</h4>
+                <h5>${item.price}</h5>
+                <button className="btn" onClick={() => handleRemove(item.id)}>
+                  Remove Items
+                </button>
+              </div>
+              
+            </>
+          );
+        })}
       </div>
     </div>
   );

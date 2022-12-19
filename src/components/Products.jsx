@@ -5,22 +5,28 @@ import { add } from "../store/cartSlice";
 
 import { useDispatch } from "react-redux";
 
+import { fetchProducts } from "../store/productSlice";
+
 const Products = () => {
   const dispatch = useDispatch();
 
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    const fetchProduct = async () => {
-      const res = await fetch("https://fakestoreapi.com/products");
+    
+    //   const fetchProduct = async () => {
+    //     const res = await fetch("https://fakestoreapi.com/products");
 
-      const data = await res.json();
-      console.log(data);
+    //     const data = await res.json();
+    //     console.log(data);
 
-      setProducts(data);
-    };
-    fetchProduct();
-  }, []);
+    //     setProducts(data);
+    //   };
+    //   fetchProduct();
+
+    dispatch(fetchProducts());
+
+  }, [dispatch]);
 
   const handleAdd = (product) => {
     //strore the product store in redux store
