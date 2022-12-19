@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 export const STATUESES = Object.freeze({
   IDLE: "idle",
@@ -13,13 +13,27 @@ const productSlice = createSlice({
     status: STATUESES.IDLE,
   },
   reducers: {
-    setProducts(state, action) {
-      state.data = action.payload;
-    },
+    // setProducts(state, action) {
+    //   state.data = action.payload;
+    // },
+    // setStatus(state, action) {
+    //   state.status = action.payload;
+    // },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchProducts.pending, (state, action) => {
+        state.status = STATUESES.LOADING;
+      })
 
-    setStatus(state, action) {
-      state.status = action.payload;
-    },
+      .addCase(fetchProducts.fulfilled, (state, action) => {
+        state.data = action.payload;
+        state.status = STATUESES.IDLE;
+      })
+
+      .addCase(fetchProducts.rejected, (state, action) => {
+        state.status = STATUESES.ERROR;
+      });
   },
 });
 
@@ -28,20 +42,27 @@ export default productSlice.reducer;
 
 //Thunks
 
-export function fetchProducts() {
-  return async function fetchProduct(dispatch, getState) {
-    dispatch(setStatus(STATUESES.LOADING));
-    try {
-      const res = await fetch("https://fakestoreapi.com/products");
+export const fetchProducts = createAsyncThunk("products/fetch", async () => {
+  const res = await fetch("https://fakestoreapi.com/products");
+  const data = await res.json();
 
-      const data = await res.json();
+  return data;
+});
 
-      dispatch(setProducts(data));
-      dispatch(setStatus(STATUESES.IDLE));
+// export function fetchProducts() {
+//   return async function fetchProduct(dispatch, getState) {
+//     dispatch(setStatus(STATUESES.LOADING));
+//     try {
+//       const res = await fetch("https://fakestoreapi.com/products");
 
-    } catch (error) {
-      console.log(error);
-      dispatch(setStatus(STATUESES.ERROR));
-    }
-  };
-}
+//       const data = await res.json();
+
+//       dispatch(setProducts(data));
+//       dispatch(setStatus(STATUESES.IDLE));
+
+//     } catch (error) {
+//       console.log(error);
+//       dispatch(setStatus(STATUESES.ERROR));
+//     }
+//   };
+// }
