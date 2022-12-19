@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const STATUESES = Object.freeze({
+export const STATUESES = Object.freeze({
   IDLE: "idle",
   ERROR: "error",
   LOADING: "loading",
@@ -39,7 +39,6 @@ export function fetchProducts() {
       dispatch(setProducts(data));
       dispatch(setStatus(STATUESES.IDLE));
 
-      
     } catch (error) {
       console.log(error);
       dispatch(setStatus(STATUESES.ERROR));
